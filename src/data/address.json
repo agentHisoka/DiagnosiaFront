@@ -1,0 +1,470 @@
+[
+  {
+    "id": "789",
+    "post_code": "22001",
+    "name": "Sidi Bel Abbes",
+    "wilaya_id": "22",
+    "ar_name": "سيدي بلعباس",
+    "longitude": "35.2063139",
+    "latitude": "-0.7001772"
+  },
+  {
+    "id": "790",
+    "post_code": "22002",
+    "name": "Tessala",
+    "wilaya_id": "22",
+    "ar_name": "تسالة",
+    "longitude": "35.2714294",
+    "latitude": "-0.8558205"
+  },
+  {
+    "id": "791",
+    "post_code": "22003",
+    "name": "Sidi Brahim",
+    "wilaya_id": "22",
+    "ar_name": "سيدي ابراهيم",
+    "longitude": "35.2591019",
+    "latitude": "-0.5991847"
+  },
+  {
+    "id": "792",
+    "post_code": "22004",
+    "name": "Mostefa Ben Brahim",
+    "wilaya_id": "22",
+    "ar_name": "مصطفى بن ابراهيم",
+    "longitude": "35.1721396",
+    "latitude": "-0.4142215"
+  },
+  {
+    "id": "793",
+    "post_code": "22005",
+    "name": "Telagh",
+    "wilaya_id": "22",
+    "ar_name": "تلاغ",
+    "longitude": "34.8036693",
+    "latitude": "-0.6044224"
+  },
+  {
+    "id": "794",
+    "post_code": "22006",
+    "name": "Mezaourou",
+    "wilaya_id": "22",
+    "ar_name": "مزاورو",
+    "longitude": "34.834391",
+    "latitude": "-0.795146"
+  },
+  {
+    "id": "795",
+    "post_code": "22007",
+    "name": "Boukhanafis",
+    "wilaya_id": "22",
+    "ar_name": "بوخنفيس",
+    "longitude": "35.046047",
+    "latitude": "-0.7594111"
+  },
+  {
+    "id": "796",
+    "post_code": "22008",
+    "name": "Sidi Ali Boussidi",
+    "wilaya_id": "22",
+    "ar_name": "سيدي علي بوسيدي",
+    "longitude": "35.1040625",
+    "latitude": "-0.8716112"
+  },
+  {
+    "id": "797",
+    "post_code": "22009",
+    "name": "Badredine El Mokrani",
+    "wilaya_id": "22",
+    "ar_name": "بدر الدين المقراني",
+    "longitude": "35.0098106",
+    "latitude": "-0.8547677"
+  },
+  {
+    "id": "798",
+    "post_code": "22010",
+    "name": "Marhoum",
+    "wilaya_id": "22",
+    "ar_name": "مرحوم",
+    "longitude": "34.4457418",
+    "latitude": "-0.2038049"
+  },
+  {
+    "id": "799",
+    "post_code": "22011",
+    "name": "Tafissour",
+    "wilaya_id": "22",
+    "ar_name": "تفسور",
+    "longitude": "34.6926458",
+    "latitude": "-0.2074045"
+  },
+  {
+    "id": "800",
+    "post_code": "22012",
+    "name": "Amarnas",
+    "wilaya_id": "22",
+    "ar_name": "العمارنة",
+    "longitude": "35.0999604",
+    "latitude": "-0.6567147"
+  },
+  {
+    "id": "801",
+    "post_code": "22013",
+    "name": "Tilmouni",
+    "wilaya_id": "22",
+    "ar_name": "تلموني",
+    "longitude": "35.1832214",
+    "latitude": "-0.5905178"
+  },
+  {
+    "id": "802",
+    "post_code": "22014",
+    "name": "Sidi Lahcene",
+    "wilaya_id": "22",
+    "ar_name": "سيدي لحسن",
+    "longitude": "35.1925854",
+    "latitude": "-0.8112957"
+  },
+  {
+    "id": "803",
+    "post_code": "22015",
+    "name": "Ain Thrid",
+    "wilaya_id": "22",
+    "ar_name": "عين التريد",
+    "longitude": "35.284671",
+    "latitude": "-0.6782448"
+  },
+  {
+    "id": "804",
+    "post_code": "22016",
+    "name": "Makedra",
+    "wilaya_id": "22",
+    "ar_name": "مكدرة",
+    "longitude": "35.4412149",
+    "latitude": "-0.4348398"
+  },
+  {
+    "id": "805",
+    "post_code": "22017",
+    "name": "Tenira",
+    "wilaya_id": "22",
+    "ar_name": "تنيرة",
+    "longitude": "35.0063927",
+    "latitude": "-0.5771282"
+  },
+  {
+    "id": "806",
+    "post_code": "22018",
+    "name": "Moulay Slissen",
+    "wilaya_id": "22",
+    "ar_name": "مولاي سليسن",
+    "longitude": "34.821448",
+    "latitude": "-0.769794"
+  },
+  {
+    "id": "807",
+    "post_code": "22019",
+    "name": "El Hacaiba",
+    "wilaya_id": "22",
+    "ar_name": "الحصيبة",
+    "longitude": "34.699542",
+    "latitude": "-0.7694292"
+  },
+  {
+    "id": "808",
+    "post_code": "22020",
+    "name": "Hassi Zehana",
+    "wilaya_id": "22",
+    "ar_name": "حاسي زهانة",
+    "longitude": "35.0251892",
+    "latitude": "-0.8964662"
+  },
+  {
+    "id": "809",
+    "post_code": "22021",
+    "name": "Tabia",
+    "wilaya_id": "22",
+    "ar_name": "طابية",
+    "longitude": "35.0181729",
+    "latitude": "-0.7786567"
+  },
+  {
+    "id": "810",
+    "post_code": "22022",
+    "name": "Merine",
+    "wilaya_id": "22",
+    "ar_name": "مرين",
+    "longitude": "34.7805884",
+    "latitude": "-0.4548597"
+  },
+  {
+    "id": "811",
+    "post_code": "22023",
+    "name": "Ras El Ma",
+    "wilaya_id": "22",
+    "ar_name": "رأس الماء",
+    "longitude": "34.5039368",
+    "latitude": "-0.8212282"
+  },
+  {
+    "id": "812",
+    "post_code": "22024",
+    "name": "Ain Tindamine",
+    "wilaya_id": "22",
+    "ar_name": "عين تندامين",
+    "longitude": "34.6890805",
+    "latitude": "-0.7245612"
+  },
+  {
+    "id": "813",
+    "post_code": "22025",
+    "name": "Ain Kada",
+    "wilaya_id": "22",
+    "ar_name": "عين قادة",
+    "longitude": "35.1368876",
+    "latitude": "-0.8607745"
+  },
+  {
+    "id": "814",
+    "post_code": "22026",
+    "name": "Mcid",
+    "wilaya_id": "22",
+    "ar_name": "مسيد",
+    "longitude": "35.139035",
+    "latitude": "-0.2525651"
+  },
+  {
+    "id": "815",
+    "post_code": "22027",
+    "name": "Sidi Khaled",
+    "wilaya_id": "22",
+    "ar_name": "سيدي خالد",
+    "longitude": "35.1200723",
+    "latitude": "-0.7417066"
+  },
+  {
+    "id": "816",
+    "post_code": "22028",
+    "name": "Ain El Berd",
+    "wilaya_id": "22",
+    "ar_name": "عين البرد",
+    "longitude": "35.3828523",
+    "latitude": "-0.5661419"
+  },
+  {
+    "id": "817",
+    "post_code": "22029",
+    "name": "Sfissef",
+    "wilaya_id": "22",
+    "ar_name": "سفيزف",
+    "longitude": "35.2442317",
+    "latitude": "-0.3162029"
+  },
+  {
+    "id": "818",
+    "post_code": "22030",
+    "name": "Ain Adden",
+    "wilaya_id": "22",
+    "ar_name": "عين عدان",
+    "longitude": "35.330304",
+    "latitude": "-0.2660537"
+  },
+  {
+    "id": "819",
+    "post_code": "22031",
+    "name": "Oued Taourira",
+    "wilaya_id": "22",
+    "ar_name": "واد تاوريرة",
+    "longitude": "34.8024792",
+    "latitude": "-0.3307029"
+  },
+  {
+    "id": "820",
+    "post_code": "22032",
+    "name": "Dhaya",
+    "wilaya_id": "22",
+    "ar_name": "الظاية",
+    "longitude": "34.6752163",
+    "latitude": "-0.6322849"
+  },
+  {
+    "id": "821",
+    "post_code": "22033",
+    "name": "Zerouala",
+    "wilaya_id": "22",
+    "ar_name": "زروالة",
+    "longitude": "35.2429835",
+    "latitude": "-0.5271103"
+  },
+  {
+    "id": "822",
+    "post_code": "22034",
+    "name": "Lamtar",
+    "wilaya_id": "22",
+    "ar_name": "لمطار",
+    "longitude": "35.0592826",
+    "latitude": "-0.8357771"
+  },
+  {
+    "id": "823",
+    "post_code": "22035",
+    "name": "Sidi Chaib",
+    "wilaya_id": "22",
+    "ar_name": "سيدي شعيب",
+    "longitude": "34.5927664",
+    "latitude": "-0.555625"
+  },
+  {
+    "id": "824",
+    "post_code": "22036",
+    "name": "Sidi Dahou",
+    "wilaya_id": "22",
+    "ar_name": "سيدي دحو",
+    "longitude": "35.1171744",
+    "latitude": "-0.9150603"
+  },
+  {
+    "id": "825",
+    "post_code": "22037",
+    "name": "Oued Sbaa",
+    "wilaya_id": "22",
+    "ar_name": "واد السبع",
+    "longitude": "34.5903826",
+    "latitude": "-0.717178"
+  },
+  {
+    "id": "826",
+    "post_code": "22038",
+    "name": "Boudjebaa El Bordj",
+    "wilaya_id": "22",
+    "ar_name": "بوجبهة البرج",
+    "longitude": "35.3519121",
+    "latitude": "-0.3280353"
+  },
+  {
+    "id": "827",
+    "post_code": "22039",
+    "name": "Sehala Thaoura",
+    "wilaya_id": "22",
+    "ar_name": "سهالة الثورة",
+    "longitude": "35.2240535",
+    "latitude": "-0.929592"
+  },
+  {
+    "id": "828",
+    "post_code": "22040",
+    "name": "Sidi Yacoub",
+    "wilaya_id": "22",
+    "ar_name": "سيدي يعقوب",
+    "longitude": "35.1557033",
+    "latitude": "-0.8069145"
+  },
+  {
+    "id": "829",
+    "post_code": "22041",
+    "name": "Sidi Hamadouche",
+    "wilaya_id": "22",
+    "ar_name": "سيدي حمادوش",
+    "longitude": "35.3114849",
+    "latitude": "-0.5885866"
+  },
+  {
+    "id": "830",
+    "post_code": "22042",
+    "name": "Belarbi",
+    "wilaya_id": "22",
+    "ar_name": "بلعربي",
+    "longitude": "35.1309933",
+    "latitude": "-0.5169609"
+  },
+  {
+    "id": "831",
+    "post_code": "22043",
+    "name": "Oued Sefioun",
+    "wilaya_id": "22",
+    "ar_name": "واد سفيون",
+    "longitude": "35.0664471",
+    "latitude": "-0.3616477"
+  },
+  {
+    "id": "832",
+    "post_code": "22044",
+    "name": "Teghalimet",
+    "wilaya_id": "22",
+    "ar_name": "تغاليمت",
+    "longitude": "34.8852137",
+    "latitude": "-0.563019"
+  },
+  {
+    "id": "833",
+    "post_code": "22045",
+    "name": "Ben Badis",
+    "wilaya_id": "22",
+    "ar_name": "ابن باديس",
+    "longitude": "34.92614",
+    "latitude": "-0.9757259"
+  },
+  {
+    "id": "834",
+    "post_code": "22046",
+    "name": "Sidi Ali Benyoub",
+    "wilaya_id": "22",
+    "ar_name": "سيدي علي بن يوب",
+    "longitude": "34.9488777",
+    "latitude": "-0.794194"
+  },
+  {
+    "id": "835",
+    "post_code": "22047",
+    "name": "Chetouane Belaila",
+    "wilaya_id": "22",
+    "ar_name": "شطوان بلايلة",
+    "longitude": "34.950063",
+    "latitude": "-0.8453465"
+  },
+  {
+    "id": "836",
+    "post_code": "22048",
+    "name": "Bir El Hammam",
+    "wilaya_id": "22",
+    "ar_name": "بئر الحمام",
+    "longitude": "34.4187435",
+    "latitude": "-0.5031502"
+  },
+  {
+    "id": "837",
+    "post_code": "22049",
+    "name": "Taoudmout",
+    "wilaya_id": "22",
+    "ar_name": "تاودموت",
+    "longitude": "34.5881382",
+    "latitude": "-0.1211071"
+  },
+  {
+    "id": "838",
+    "post_code": "22050",
+    "name": "Redjem Demouche",
+    "wilaya_id": "22",
+    "ar_name": "رجم دموش",
+    "longitude": "34.4269826",
+    "latitude": "-0.8185673"
+  },
+  {
+    "id": "839",
+    "post_code": "22051",
+    "name": "Benachiba Chelia",
+    "wilaya_id": "22",
+    "ar_name": "بن عشيبة شلية",
+    "longitude": "34.9637049",
+    "latitude": "-0.6169817"
+  },
+  {
+    "id": "840",
+    "post_code": "22052",
+    "name": "Hassi Dahou",
+    "wilaya_id": "22",
+    "ar_name": "حاسي دحو",
+    "longitude": "35.108878",
+    "latitude": "-0.5963542"
+  }
+]

@@ -1,0 +1,37 @@
+/* CSS Transition Classes */
+.fade-enter {
+  opacity: 0.01;
+  transform: translateY(-20px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+/* Add this CSS to your styles file or component */
+.doctor-cards-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 16px; /* Adjust the gap as needed */
+  padding-bottom: 16px; /* Add some spacing at the bottom */
+}
+
+/* Style for individual doctor cards */
+.doctor-card {
+  /* Your existing card styles */
+  width: 300px; /* Set a fixed width for each card */
+  /* Add any other styles you need */
+}

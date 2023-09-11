@@ -1,0 +1,37 @@
+/* custom-styles.css */
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #4caf50; /* Color when the toggle is checked (doctor) */
+}
+
+.toggle-checkbox:checked + .toggle-label::before {
+  transform: translateX(1.5rem); /* Move the lever to the right when checked */
+}
+
+.toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggle-label {
+  display: block;
+  width: 3rem;
+  height: 1.5rem;
+  background-color: #ccc; /* Default background color for the toggle */
+  border-radius: 0.75rem;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-label::before {
+  content: '';
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: white; /* Lever color */
+  border-radius: 50%;
+  top: 0.125rem; /* Vertical centering */
+  left: 0.125rem; /* Starting position */
+  transition: transform 0.2s ease;
+}

@@ -1,0 +1,8 @@
+.box:hover {
+  transform: scale(1.05);
+  transition: all 0.4s ease;
+}
+
+.grand {
+  margin-bottom: 40px;
+}

@@ -1,0 +1,133 @@
+/* Modern CTA Section Styles with Beautiful Animations */
+.diag__cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 2rem;
+  margin: 4rem;
+  border-radius: 1rem;
+  background: var(--gradient-bar);
+  animation: fadeInUp 1s ease both;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+
+.diag__cta-content:hover {
+  transform: scale(1.05);
+  transition: all 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.diag__cta-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  color: #fff;
+}
+
+.diag__cta-content p {
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: 500;
+  animation: fadeInLeft 1s ease both;
+}
+
+.diag__cta-content h3 {
+  font-family: var(--font-family);
+  font-size: 24px;
+  line-height: 45px;
+  font-weight: 800;
+  animation: fadeInLeft 1s ease both;
+}
+
+.diag__cta-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2rem;
+  animation: fadeInRight 1s ease both;
+}
+
+.diag__cta-btn button {
+  background: #000;
+  color: #fff;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 30px;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  min-width: 150px;
+  transition: background-color 0.3s ease;
+}
+
+.diag__cta-btn button:hover {
+  background-color: #333;
+  transform: scale(1.1) translateX(0.5rem);
+  transition: all 0.4s ease;
+}
+
+/* Media Queries */
+@media screen and (max-width: 650px) {
+  .diag__cta {
+    flex-direction: column;
+    margin: 4rem 2rem;
+  }
+
+  .diag__cta-content h3 {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .diag__cta-btn {
+    margin: 2rem 0 0;
+  }
+
+  .diag__cta-content p,
+  .diag__cta-content h3,
+  .diag__cta-btn button {
+    animation: fadeInUp 1s ease both;
+  }
+}
+
+
+@media screen and (max-width: 650px) {
+  .diag__cta {
+    flex-direction: column;
+  }
+
+  .diag__cta-btn {
+    margin: 2rem 0 0;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .diag__cta {
+    flex-direction: column;
+    margin: 4rem 2rem;
+  }
+
+  .diag__cta-content h3 {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .diag__cta-btn button {
+    font-size: 14px;
+    line-height: 28px;
+  }
+}

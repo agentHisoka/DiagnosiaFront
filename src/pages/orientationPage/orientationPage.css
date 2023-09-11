@@ -1,0 +1,19 @@
+.details-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.doctor-info {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.treatment {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
