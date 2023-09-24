@@ -26,7 +26,6 @@ import logo from "../../assets/progpan.png";
 */
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-
   return (
     <div className="diag__navbar">
       <div className="diag__navbar-links">

@@ -22,8 +22,10 @@ function Login() {
     if (auth) {
       if (userRole === "doctor") {
         navigate("/dashboard/doc");
-      } else {
+      } else if (userRole === "visitor") {
         navigate("/dashboard/patient");
+      } else {
+        navigate("/dashboard/admin");
       }
     }
   }, [auth, navigate]);
@@ -33,7 +35,10 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/login", { email, password })
+      .post("http://localhost:3001/login", {
+        email,
+        password,
+      })
       .then((res) => {
         console.log("login: " + res.data);
         if (res.data.Status === "Success") {

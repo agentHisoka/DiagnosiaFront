@@ -9,20 +9,19 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid"; // Import DataGrid components
-import { useParams } from "react-router-dom"; // For extracting user ID from URL
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./userProfile.css";
 import { isAuthenticated } from "../../scenes/auth";
 
 export default function ProfilePage() {
-  // Define a state variable to store user data
   const { id } = useParams();
   const [userData, setUserData] = useState({
     name: "",
     specialty: "",
     address: "",
-    avatar: "", // Initialize with an empty string or the default avatar URL
+    avatar: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -38,17 +37,20 @@ export default function ProfilePage() {
   const [isEditingProfilePicture, setIsEditingProfilePicture] = useState(false);
   const decodedToken = isAuthenticated();
   const avatar = decodedToken.avatar.replace(/uploads\\/g, "");
-  console.log("adaefefezfeef" + avatar);
+
+  // State to store patient names
+  const [patientNames, setPatientNames] = useState([]);
+
+  // State to store the count of appointments with a specific doctor
+  const [appointmentCount, setAppointmentCount] = useState(0);
+
   useEffect(() => {
-    // Make an API call to fetch user data based on the ID
     axios
       .get(`http://localhost:3001/api/user/${id}`)
       .then((response) => {
-        // Handle fetched user data
         setUserData(response.data);
         setEditedUserData({
           ...response.data,
-          // Set the initial specialty based on the user's role
           specialty:
             response.data.role === "visitor"
               ? "patient"
@@ -59,16 +61,40 @@ export default function ProfilePage() {
             /uploads\\/g,
             ""
           )}`
-        ); // Set the avatar URL
+        );
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
         setIsLoading(false);
       });
+
+    // Fetch all appointments
+    axios
+      .get("http://localhost:3001/api/appointments")
+      .then((response) => {
+        // Filter appointments to include only those for the logged-in doctor
+        const doctorAppointments = response.data.filter(
+          (appointment) => appointment.doctor === decodedToken.name
+        );
+
+        // Count the number of appointments for the logged-in doctor
+        const count = doctorAppointments.length;
+        setAppointmentCount(count);
+
+        // Extract patient names from filtered appointments and store them in the state
+        const names = doctorAppointments.map(
+          (appointment) => appointment.patientName
+        );
+        setPatientNames(names);
+      })
+      .catch((error) => {
+        console.error("Error fetching appointments:", error);
+      });
   }, [id]);
 
   const [file, setFile] = useState(null);
-  const [selectedAvatar, setSelectedAvatar] = useState(null); // State to store the selected avatar
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -201,8 +227,7 @@ export default function ProfilePage() {
 
   // Sample data for the DataGrid
   const mockDataContacts = [
-    { id: 1, name: "User 1", appointmentDate: "2023-08-30" },
-    { id: 2, name: "User 2", appointmentDate: "2023-09-05" },
+    { id: 1, name: "patient", appointmentDate: "2023-09-14" },
     // Add more rows as needed
   ];
 
@@ -211,7 +236,7 @@ export default function ProfilePage() {
     { field: "name", headerName: "User Name", width: 200, sortable: false },
     {
       field: "appointmentDate",
-      headerName: "Appointment Date",
+      headerName: "Times",
       width: 200,
       sortable: false,
     },
@@ -296,7 +321,7 @@ export default function ProfilePage() {
                     variant="outlined"
                     value={editedUserData.specialty}
                     onChange={handleInputChange}
-                    disabled={!isEditing}
+                    disabled={true}
                     sx={{ mt: 2 }}
                   />
                   <TextField
@@ -351,10 +376,12 @@ export default function ProfilePage() {
                   <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
                     Users with Appointments
                   </Typography>
-                  {/* Render the DataGrid for users with appointments */}
                   <Box m="40px 0 0 0" height="75vh">
                     <DataGrid
-                      rows={mockDataContacts}
+                      rows={patientNames.map((name, index) => ({
+                        id: index + 1,
+                        name,
+                      }))}
                       columns={columns}
                       components={{ Toolbar: GridToolbar }}
                     />

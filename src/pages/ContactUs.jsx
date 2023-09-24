@@ -20,8 +20,8 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="mt-8 mx-4 h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-start">
+    <div className="mt-8 mx-4 h-screen flex items-center justify-center">
+      <div className="grid grid-cols-1 items-start">
         <div
           className="p-2 flex flex-col justify-center hover:scale-105 transition duration-700 ease-in-out"
           sx={{

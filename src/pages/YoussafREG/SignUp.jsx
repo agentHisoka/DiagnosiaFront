@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AutoComplete } from "rsuite";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import FontAwesome eye icons
 import addr from "../../data/address.json";
 import specialities from "../../data/specialities.json";
 import "./signUP.css";
@@ -15,6 +16,8 @@ function Signup() {
   const [address, setAddress] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState("");
   const [specialtyInput, setSpecialtyInput] = useState("");
+  const [gender, setGender] = useState(""); // New state variable for gender
+  const [genderError, setGenderError] = useState(""); // Define genderError as a constant
 
   const [isDoctor, setIsDoctor] = useState(false);
   /// validation consts
@@ -66,11 +69,17 @@ function Signup() {
       setPasswordError("");
     }
 
-    if (!address) {
-      setAddressError("Address is required");
+    if (!address || !addr.some((location) => location.ar_name === address)) {
+      setAddressError("Address not found");
       isValid = false;
     } else {
       setAddressError("");
+    }
+    if (!gender) {
+      setGenderError("Gender is required"); // Add this line to set the error message
+      isValid = false;
+    } else {
+      setGenderError(""); // Clear the gender error if it's valid
     }
 
     // Validate Specialty (if applicable)
@@ -92,6 +101,7 @@ function Signup() {
           password,
           address,
           specialty: isDoctor ? selectedSpecialty : "",
+          gender,
         })
         .then((res) => {
           navigate("/signIN");
@@ -115,6 +125,13 @@ function Signup() {
         "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one number."
       );
     }
+  };
+
+  const [showPassword, setShowPassword] = useState(false); // State variable to show/hide password
+
+  // Function to handle the "Show Password" checkbox
+  const handleShowPasswordChange = () => {
+    setShowPassword(!showPassword); // Toggle the state
   };
 
   return (
@@ -145,7 +162,7 @@ function Signup() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="mb-4">
             <label htmlFor="name" className="block font-medium text-black ">
-              Name
+              Full Name
             </label>
             <input
               type="text"
@@ -175,15 +192,40 @@ function Signup() {
             <label htmlFor="password" className="block font-medium text-black">
               Password
             </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="password"
-              className="border rounded py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-500"
-              onChange={handlePasswordChange}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"} // Toggle between "text" and "password"
+                placeholder="Enter Password"
+                name="password"
+                className="border rounded py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-500"
+                onChange={handlePasswordChange}
+              />
+              <span
+                className="absolute top-2 right-2 cursor-pointer"
+                onClick={handleShowPasswordChange}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Eye icons */}
+              </span>
+            </div>
             {passwordError && <p className="text-red-500">{passwordError}</p>}
           </div>
+          <div className="mb-4">
+            <label htmlFor="gender" className="block font-medium text-black">
+              Gender
+            </label>
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              name="gender"
+              className="border rounded py-2 px-3 w-full focus:outline-none focus:ring focus:border-blue-500"
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            {genderError && <p className="text-red-500">{genderError}</p>}
+          </div>
+
           <div className="mb-4">
             <label htmlFor="address" className="block font-medium text-black">
               Address

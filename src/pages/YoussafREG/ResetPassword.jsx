@@ -5,6 +5,7 @@ import axios from "axios";
 
 function ResetPassword() {
   const [password, setPassword] = useState();
+  const [resetStatus, setResetStatus] = useState(null);
   const navigate = useNavigate();
   const { id, token } = useParams();
 
@@ -15,10 +16,17 @@ function ResetPassword() {
       .post(`http://localhost:3001/reset-password/${id}/${token}`, { password })
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigate("/signIN");
+          setResetStatus("Password reset successfully.");
+          // Redirect after a delay or provide a link to redirect
+          setTimeout(() => navigate("/signIN"), 2000);
+        } else {
+          setResetStatus("Password reset failed. Please try again.");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+        setResetStatus("An error occurred. Please try again later.");
+      });
   };
 
   return (
@@ -27,6 +35,9 @@ function ResetPassword() {
         <h4 className="text-3xl font-semibold mb-6 text-center text-blue-700">
           Reset Password
         </h4>
+        {resetStatus && (
+          <div className="mb-4 text-center text-red-500">{resetStatus}</div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="mb-4">
             <label
@@ -41,7 +52,7 @@ function ResetPassword() {
               autoComplete="off"
               name="password"
               className="border rounded py-2 px-3 w-full focus:outline-none focus:ring focus:border-primary"
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button

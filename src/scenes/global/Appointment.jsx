@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import specialitiesData from "../../data/specialities.json";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useLocation } from "react-router-dom";
+import AuthContext from "../AuthContext";
+import { isAuthenticated } from "../auth";
 
 const Appointment = () => {
   const [doctors, setDoctors] = useState([]);
@@ -9,8 +12,12 @@ const Appointment = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [appointmentConfirmed, setAppointmentConfirmed] = useState(false);
-  const [selectedSpecialty, setSelectedSpecialty] = useState(""); // New state for selected specialty
-  const [appointments, setAppointments] = useState([]); // State for fetched appointments
+  const [selectedSpecialty, setSelectedSpecialty] = useState("");
+  const [appointments, setAppointments] = useState([]);
+  const { auth } = useContext(AuthContext);
+  const decodedToken = isAuthenticated();
+  const userId = decodedToken.userId;
+  const patientName = decodedToken.name;
 
   useEffect(() => {
     axios
@@ -25,7 +32,7 @@ const Appointment = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/appointments") // Replace with your actual API endpoint
+      .get("http://localhost:3001/appointments")
       .then((response) => {
         setAppointments(response.data);
       })
@@ -55,16 +62,17 @@ const Appointment = () => {
     : doctors;
 
   const handlePayment = (e) => {
-    // Implement payment processing here (e.g., with Stripe or PayPal)
-    // Once payment is successful, save the appointment details and display them
     const appointment = {
-      doctor: selectedDoctor,
+      doctor: selectedDoctor.name,
       date: selectedDate,
       time: selectedTime,
+      specialty: selectedDoctor.specialty,
+      doctorAddress: selectedDoctor.address,
+      patient: userId,
+      patientName: patientName,
     };
     e.preventDefault();
 
-    // Send the appointment data to the server
     axios
       .post("http://localhost:3001/api/appointments", appointment)
       .then((response) => {
@@ -73,7 +81,7 @@ const Appointment = () => {
         }
       })
       .catch((error) => {
-        // Handle errors here
+        console.log(appointment);
         console.error("Error creating appointment:", error);
       });
   };
@@ -86,7 +94,7 @@ const Appointment = () => {
           <h2 className="text-lg font-semibold mb-2">Select a Specialty</h2>
           <select
             value={selectedSpecialty}
-            onChange={(e) => setSelectedSpecialty(e.target.value)}
+            onChange={(e) => handleSpecialtySelect(e.target.value)}
             className="border rounded py-2 px-3 mb-4"
           >
             <option value="">All</option>
@@ -107,13 +115,15 @@ const Appointment = () => {
                 <CSSTransition key={doctor._id} timeout={300} classNames="fade">
                   <div
                     className={`doctor-card ${
-                      selectedDoctor?._id === doctor._id ? "selected" : ""
+                      selectedDoctor?._id === doctor._id
+                        ? "selected-doctor"
+                        : ""
                     }`}
                     onClick={() => handleDoctorSelect(doctor)}
                     style={{ flex: "0 0 auto", marginRight: "16px" }}
                   >
                     <img
-                      src={doctor.avatar}
+                      src={`http://localhost:3001/${doctor.avatar}`}
                       alt={`${doctor.name}'s Photo`}
                       className="w-full h-32 object-cover rounded-md mb-2 text-black"
                     />
@@ -125,33 +135,29 @@ const Appointment = () => {
             </TransitionGroup>
           </div>
         </div>
-        {selectedDoctor && (
-          <div>
-            <h2 className="text-lg font-semibold mb-2">Select a Date</h2>
-            <input
-              type="date"
-              value={selectedDate}
-              onChange={(e) => handleDateSelect(e.target.value)}
-              className="border rounded py-2 px-3 mb-4"
-            />
-          </div>
-        )}
-        {selectedDate && (
-          <div>
-            <h2 className="text-lg font-semibold mb-2">Select a Time</h2>
-            <select
-              value={selectedTime}
-              onChange={(e) => handleTimeSelect(e.target.value)}
-              className="border rounded py-2 px-3 mb-4"
-            >
-              <option value="9:00 AM">9:00 AM</option>
-              <option value="10:00 AM">10:00 AM</option>
-              <option value="11:00 AM">11:00 AM</option>
-              {/* Add more time slots */}
-            </select>
-          </div>
-        )}
-        {selectedTime && !appointmentConfirmed && (
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Select a Date</h2>
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(e) => handleDateSelect(e.target.value)}
+            className="border rounded py-2 px-3 mb-4"
+          />
+        </div>
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Select a Time</h2>
+          <select
+            value={selectedTime}
+            onChange={(e) => handleTimeSelect(e.target.value)}
+            className="border rounded py-2 px-3 mb-4"
+          >
+            <option value="9:00 AM">9:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            {/* Add more time slots */}
+          </select>
+        </div>
+        {!appointmentConfirmed && (
           <div>
             <h2 className="text-lg font-semibold mb-2">Payment</h2>
             <button onClick={handlePayment}>Confirm Appointment</button>

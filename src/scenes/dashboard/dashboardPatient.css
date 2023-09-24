@@ -1,12 +1,24 @@
-.model{
-    width: 500px;
-    height: 500px;
+.model {
+  width: 500px;
+  height: 500px;
 }
- 
 
 @media screen and (max-width: 768px) {
-    .model{
-        width: 350px;
-        height: 350px;
-    }
+  .model {
+    width: 350px;
+    height: 350px;
+  }
+}
+/* dashboardPatient.css */
+
+/* Add this CSS class to style the articles container */
+/* dashboardPatient.css */
+
+/* Update the CSS class for the horizontal scroll container */
+.horizontal-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 16px; /* Adjust padding as needed */
+  width: 100%; /* Make it span the full page width */
 }

@@ -1,32 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import axios for making API requests
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const Appointments = () => {
-  const appointments = [
-    {
-      id: 1,
-      doctor: "Dr. John Doe",
-      specialization: "Cardiologist",
-      date: "2023-09-15",
-      time: "10:00 AM",
-      image:
-        "https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*",
-      doctorAddress: "123 Main St, City, Country",
-    },
-    {
-      id: 2,
-      doctor: "Dr. Jane Smith",
-      specialization: "Dermatologist",
-      date: "2023-09-20",
-      time: "2:30 PM",
-      image:
-        "https://www.moffitt.org/globalassets/images/providers_bio/GreeneJohn_902.jpg",
-      doctorAddress: "456 Elm St, Town, Country",
-    },
-  ];
-
+  const [appointments, setAppointments] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/appointments")
+      .then((response) => {
+        setAppointments(response.data);
+        setIsLoading(false); // Data has been fetched
+      })
+      .catch((error) => {
+        console.error("Error fetching appointments:", error);
+        setIsLoading(false); // Data fetch failed
+      });
+  }, []);
 
   const handleCardClick = (appointment) => {
     setSelectedAppointment(appointment);
@@ -46,28 +39,23 @@ const Appointments = () => {
   return (
     <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-semibold mb-4">My Appointments</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {appointments.map((appointment) => (
-          <div
-            key={appointment.id}
-            className="bg-white shadow-md rounded-lg p-4 transform hover:scale-105 transition-transform cursor-pointer"
-            onClick={() => handleCardClick(appointment)}
-          >
-            <img
-              src={appointment.image}
-              alt={`${appointment.doctor}`}
-              className="w-64 h-64 object-cover rounded-md mb-4"
-            />
-            <h2 className="text-xl font-semibold text-blue-500 mb-2">
-              {appointment.doctor}
-            </h2>
-            <p className="text-gray-600">{appointment.specialization}</p>
-            <p className="text-gray-600">
-              Date: {appointment.date}, Time: {appointment.time}
-            </p>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        // Display a loading spinner or message while fetching data
+        <div>Loading...</div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {appointments.map((appointment, index) => (
+            <div
+              key={appointment._id} // Assuming '_id' is the unique identifier of the appointment
+              className="bg-white shadow-md rounded-lg p-4 transform hover:scale-105 transition-transform cursor-pointer"
+              onClick={() => handleCardClick(appointment)}
+            >
+              <p className="text-gray-500">Appointment {index + 1}</p>
+              {/* Render appointment details here */}
+            </div>
+          ))}
+        </div>
+      )}
 
       {isModalOpen && (
         <div
@@ -126,8 +114,14 @@ const Appointments = () => {
               <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
                 Edit
               </button>
-              <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300">
-                Pay
+              <button
+                className={`${
+                  selectedAppointment.paid
+                    ? "bg-green-500 hover:bg-green-600"
+                    : "bg-red-500 hover:bg-red-600"
+                } text-white py-2 px-4 rounded transition duration-300`}
+              >
+                {selectedAppointment.paid ? "Paid" : "Pay"}
               </button>
             </div>
           </div>

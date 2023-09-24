@@ -1,30 +1,31 @@
-import React, { useState } from "react";
-import { FaMale, FaFemale, FaStethoscope } from "react-icons/fa"; // Import icons from react-icons
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"; // Import DnD components
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { FaMale, FaFemale, FaStethoscope } from "react-icons/fa";
+import { isAuthenticated } from "../auth";
+import AuthContext from "../AuthContext";
 
 const Calendar = () => {
-  const [appointments, setAppointments] = useState([
-    // Sample appointment data
-    {
-      date: new Date(),
-      hour: "10:00 AM",
-      patientName: "John Doe",
-      age: 30,
-      gender: "Male",
-      appointmentType: "Follow-up",
-    },
-    {
-      date: new Date(),
-      hour: "10:30 AM",
-      patientName: "John Doe",
-      age: 30,
-      gender: "Male",
-      appointmentType: "Follow-up",
-    },
-    // Add more appointments here
-  ]);
+  const { auth } = useContext(AuthContext);
+  const decodedToken = isAuthenticated();
+  const loggedInDoctorId = decodedToken.userId;
+  const DoctorName = decodedToken.name;
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Create an array of dates for the next 7 days
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/appointments")
+      .then((response) => {
+        setAppointments(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
+
   const dates = [];
   for (let i = 0; i < 7; i++) {
     const date = new Date();
@@ -32,18 +33,19 @@ const Calendar = () => {
     dates.push(date);
   }
 
-  // Create an array of hours from 8 AM to 5 PM
   const hours = [];
   for (let i = 8; i <= 17; i++) {
     hours.push(`${i}:00 AM`);
     hours.push(`${i}:30 AM`);
   }
 
-  // Function to render appointment cards
   const renderAppointment = (date, hour) => {
     const appointment = appointments.find(
       (apt) =>
-        apt.date.toDateString() === date.toDateString() && apt.hour === hour
+        new Date(apt.date).toDateString() === date.toDateString() &&
+        apt.time === hour &&
+        apt.doctor === DoctorName &&
+        apt.paid === true
     );
 
     if (appointment) {
@@ -59,10 +61,10 @@ const Calendar = () => {
               {appointment.patientName}
             </p>
           </div>
-          <p>Age: {appointment.age}</p>
+          <p>At {appointment.time}</p>
           <div className="flex items-center mt-2">
             <FaStethoscope className="text-gray-500 mr-2" />
-            <p>{appointment.appointmentType}</p>
+            <p>{appointment.specialty}</p>
           </div>
         </div>
       );
@@ -76,7 +78,7 @@ const Calendar = () => {
       <h1 className="text-3xl font-semibold mb-3">
         Doctor's Appointment Calendar
       </h1>
-      <div className="grid grid-cols-8 gap-2">
+      <div className="grid grid-cols-8 gap-2 md:grid-cols-4 lg:grid-cols-8">
         <div className="col-span-1"></div>
         {dates.map((date) => (
           <div className="col-span-1 text-center" key={date.toDateString()}>
@@ -93,7 +95,10 @@ const Calendar = () => {
           <React.Fragment key={hour}>
             <div className="col-span-1 text-right pr-2 py-1">{hour}</div>
             {dates.map((date) => (
-              <div className="col-span-1" key={`${date}-${hour}`}>
+              <div
+                className="col-span-1 md:col-span-2 lg:col-span-1"
+                key={`${date}-${hour}`}
+              >
                 {renderAppointment(date, hour)}
               </div>
             ))}

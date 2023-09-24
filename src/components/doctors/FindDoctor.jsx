@@ -3,40 +3,62 @@ import axios from "axios";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./FindDoctor.css";
 import specialitiesData from "../../data/specialities.json";
+import addressesData from "../../data/villes.json"; // Import the addresses data
 import { AutoComplete } from "rsuite";
 
 const FindDoctor = () => {
-  const [specialization, setSpecialization] = useState("");
   const [doctors, setDoctors] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState("");
+  const [filterType, setFilterType] = useState("specialization"); // Default to specialization
+  const [filterValue, setFilterValue] = useState("");
+
+  const handleInputChange = (value) => {
+    setFilterValue(value); // Update filterValue when user types
+    let filteredSuggestions;
+    if (filterType === "specialization") {
+      filteredSuggestions = specialitiesData.filter((item) =>
+        item.toLowerCase().startsWith(value.toLowerCase())
+      );
+    } else if (filterType === "address") {
+      filteredSuggestions = addressesData.filter((item) =>
+        item.toLowerCase().startsWith(value.toLowerCase())
+      );
+    }
+    setSuggestions(filteredSuggestions);
+    setError("");
+  };
 
   const handleSearch = async () => {
     setDoctors([]);
     setError(""); // Clear any previous error messages
-    const trimmedSpecialization = specialization.trim();
-    if (!trimmedSpecialization) {
-      setError("Please type in a specialization to check.");
+    const trimmedFilterValue = filterValue.trim();
+    if (!trimmedFilterValue) {
+      setError(
+        `Please enter a ${
+          filterType === "specialization" ? "specialization" : "valid address"
+        } to check.`
+      );
       setDoctors([]); // Clear the doctor list
       return;
     }
 
-    if (!specialitiesData.includes(trimmedSpecialization)) {
-      setError("Please enter a valid specialization.");
-      setDoctors([]); // Clear the doctor list
-      return;
-    }
     try {
       setError(""); // Clear any previous error messages
 
-      const response = await axios.get(
-        `http://localhost:3001/doctors/specialization/${specialization}`
-      );
-      if (
-        response.data.length === 0 &&
-        specialitiesData.includes(trimmedSpecialization)
-      ) {
-        setError("No doctors found for this specialization.");
+      const response = await axios.get("http://localhost:3001/doctor", {
+        params: {
+          filterType, // Use the selected filter type
+          filterValue: trimmedFilterValue,
+        },
+      });
+
+      if (response.data.length === 0) {
+        setError(
+          `No doctors found for this ${
+            filterType === "specialization" ? "specialization" : "address"
+          }.`
+        );
         setDoctors([]); // Clear the doctor list
       } else {
         setDoctors(response.data);
@@ -47,30 +69,32 @@ const FindDoctor = () => {
     }
   };
 
-  const handleInputChange = (value) => {
-    setSpecialization(value);
-    const filteredSuggestions = specialitiesData.filter((item) =>
-      item.toLowerCase().startsWith(value.toLowerCase())
-    );
-    setSuggestions(filteredSuggestions);
-    setError("");
+  const handleFilterTypeChange = (e) => {
+    setFilterType(e.target.value);
+    setFilterValue(""); // Clear the input field when switching filter types
   };
 
   return (
     <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-semibold mb-4">
-        Find a Doctor by Specialization
+        Find a Doctor by{" "}
+        {filterType === "specialization" ? "Specialty" : "Address"}
       </h1>
       <div className="flex gap-4 mb-6">
         <AutoComplete
-          placeholder="Enter Specialization (e.g. Cardiologist)"
+          placeholder={`Enter ${
+            filterType === "specialization" ? "Specialty" : "Address"
+          } (e.g. Cardiologist)`}
           type="text"
           className={`border rounded py-2 px-3 w-full text-black ${
             error ? "border-red-500" : ""
           }`}
           onChange={handleInputChange}
-          value={specialization}
-          data={specialitiesData}
+          value={filterValue} // Update from specialization to filterValue
+          data={
+            filterType === "specialization" ? specialitiesData : addressesData
+          }
+          // Use different data sources based on the filter type
         />
         <button
           className="bg-blue-500 text-white py-2 px-4 rounded"
@@ -78,18 +102,26 @@ const FindDoctor = () => {
         >
           Search
         </button>
+        <select
+          value={filterType}
+          onChange={handleFilterTypeChange}
+          className="border rounded py-2 px-3 text-black"
+        >
+          <option value="specialization">Specialization</option>
+          <option value="address">Address</option>
+        </select>
       </div>
       {error && <p className="text-red-500">{error}</p>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {doctors.length === 0 && !error ? (
-          <p></p>
+          <p>No doctors found.</p>
         ) : (
           <TransitionGroup component={null}>
             {doctors.map((doctor) => (
               <CSSTransition key={doctor.id} timeout={300} classNames="fade">
                 <div className="bg-white shadow-md rounded-lg p-4 cardx">
                   <img
-                    src={doctor.img}
+                    src={`http://localhost:3001/${doctor.avatar}`}
                     alt={`${doctor.name}'s Photo`}
                     className="w-full h-32 object-cover rounded-md mb-2 text-black"
                   />

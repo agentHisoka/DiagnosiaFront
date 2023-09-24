@@ -35,3 +35,9 @@
   width: 300px; /* Set a fixed width for each card */
   /* Add any other styles you need */
 }
+/* Add this CSS to your stylesheet or component */
+.doctor-card.selected-doctor {
+  background-color: grey; /* Change to the desired grey color */
+  border: 2px solid #007bff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}

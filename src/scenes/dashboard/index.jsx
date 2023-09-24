@@ -59,7 +59,7 @@ const HomeDashy = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">557</p>
+            <p className="text-2xl">23</p>
             <p>Orders</p>
           </div>
         </div>
@@ -82,7 +82,7 @@ const HomeDashy = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">$11,257</p>
+            <p className="text-2xl">DZ 1,257</p>
             <p>Sales</p>
           </div>
         </div>
@@ -105,7 +105,7 @@ const HomeDashy = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">$75,257</p>
+            <p className="text-2xl">DZ 5,257</p>
             <p>Balances</p>
           </div>
         </div>
@@ -150,7 +150,7 @@ const HomeDashy = () => {
                       Facebook
                     </th>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      5,480
+                      480
                     </td>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <div className="flex items-center">
@@ -168,7 +168,7 @@ const HomeDashy = () => {
                       Twitter
                     </th>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      3,380
+                      80
                     </td>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <div className="flex items-center">
@@ -186,7 +186,7 @@ const HomeDashy = () => {
                       Instagram
                     </th>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      4,105
+                      1050
                     </td>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <div className="flex items-center">
@@ -204,7 +204,7 @@ const HomeDashy = () => {
                       Google
                     </th>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      4,985
+                      985
                     </td>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <div className="flex items-center">
@@ -222,7 +222,7 @@ const HomeDashy = () => {
                       Linkedin
                     </th>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      2,250
+                      50
                     </td>
                     <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <div className="flex items-center">
@@ -281,16 +281,16 @@ const HomeDashy = () => {
                           className="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100"
                           href="#0"
                         >
-                          Nick Mark
+                          Dr Ahmed Lyamani
                         </a>{" "}
-                        mentioned{" "}
+                        confirms appointment{" "}
                         <a
                           className="font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100"
                           href="#0"
                         >
-                          Sara Smith
+                          with
                         </a>{" "}
-                        in a new post
+                        Patient Azzou Yaniss
                       </div>
                       <div className="flex-shrink-0 ml-2">
                         <a
@@ -330,19 +330,19 @@ const HomeDashy = () => {
                   <div className="flex-grow flex items-center border-gray-100 text-sm text-gray-600 dark:text-gray-50 py-2">
                     <div className="flex-grow flex justify-between items-center">
                       <div className="self-center">
-                        The post{" "}
+                        The Appointment{" "}
                         <a
                           className="font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100"
                           href="#0"
                         >
-                          Post Name
+                          [N0 -21]
                         </a>{" "}
                         was removed by{" "}
                         <a
                           className="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100"
                           href="#0"
                         >
-                          Nick Mark
+                          Admin yacine
                         </a>
                       </div>
                       <div className="flex-shrink-0 ml-2">
@@ -392,14 +392,14 @@ const HomeDashy = () => {
                           className="font-medium text-gray-800 hover:text-gray-900 dark:text-gray-50 dark:hover:text-gray-100"
                           href="#0"
                         >
-                          240+
+                          20+
                         </a>{" "}
-                        users have subscribed to{" "}
+                        users have read{" "}
                         <a
                           className="font-medium text-gray-800 dark:text-gray-50 dark:hover:text-gray-100"
                           href="#0"
                         >
-                          Newsletter #1
+                          Article #5
                         </a>
                       </div>
                       <div className="flex-shrink-0 ml-2">

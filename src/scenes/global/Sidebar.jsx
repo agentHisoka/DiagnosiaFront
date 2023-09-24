@@ -54,10 +54,10 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const { auth } = useContext(AuthContext);
   const decodedToken = isAuthenticated();
+  const avatar = decodedToken.avatar.replace(/uploads\\/g, "");
+
   const userName = decodedToken.name;
   const userRole = decodedToken.role;
-  const avatar = decodedToken.avatar.replace(/uploads\\/g, "");
-  console.log(avatar);
 
   return (
     <Box
@@ -98,7 +98,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  DIAGNOSIR
+                  DIAGNOSIA
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -139,6 +139,24 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            {userRole === "admin" && (
+              <Item
+                title="Dashboard"
+                to="/dashboard/admin"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )}
+            {userRole === "visitor" && (
+              <Item
+                title="Dashboard"
+                to="/dashboard/patient"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )}{" "}
             {userRole === "doctor" && (
               <Item
                 title="Dashboard"
@@ -148,17 +166,6 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
             )}
-
-            {userRole === "visitor" && (
-              <Item
-                title="Dashboard"
-                to="/dashboard/patient"
-                icon={<HomeOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            )}
-
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -181,7 +188,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Get Appointment"
+              title="Book Appointment"
               to="/dashboard/getAppointment"
               icon={<CalendarMonth />}
               selected={selected}
@@ -194,7 +201,6 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -223,7 +229,6 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
             <Typography
               variant="h6"
               color={colors.grey[300]}

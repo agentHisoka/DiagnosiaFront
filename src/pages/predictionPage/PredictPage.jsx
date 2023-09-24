@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { AutoComplete } from "rsuite";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Card, CardContent } from "@mui/material";
 import "./predictPage.css";
 import data from "./dataSource.json";
+import { useSpring, animated } from "react-spring"; // Import react-spring
 
 export default function PredictPage() {
   const [symptoms, setSymptoms] = useState(["", "", "", "", ""]);
@@ -12,7 +13,13 @@ export default function PredictPage() {
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedSymptoms, setSelectedSymptoms] = useState([]); // Keep track of selected symptoms
+  const [requiredMeasurement, setRequiredMeasurement] = useState(""); // Measurement state
+  const [isResultVisible, setResultVisible] = useState(false); // Track result visibility
 
+  const springProps = useSpring({
+    transform: isResultVisible ? "scale(1)" : "scale(0)", // Scale effect for pop-out
+    opacity: isResultVisible ? 1 : 0, // Opacity for fading in/out
+  });
   const handleSymptomChange = (value, index) => {
     const updatedSymptoms = [...symptoms];
     updatedSymptoms[index] = value;
@@ -35,8 +42,12 @@ export default function PredictPage() {
         symptoms: selectedSymptomsWithoutDuplicates,
       });
 
-      setDiagnosisResult(response.data.predicted_disease);
+      const { predicted_disease, required_measurement } = response.data;
+
+      setDiagnosisResult(predicted_disease);
+      setRequiredMeasurement(required_measurement);
       setShowError(false);
+      setResultVisible(true); // Show the result container with animation
     } catch (error) {
       console.error("Error sending data:", error);
     }
@@ -101,22 +112,29 @@ export default function PredictPage() {
       )}
 
       {diagnosisResult && !showError && (
-        <div className="result-container">
-          <div className="diagnosis-result">
-            <Typography variant="h6">Diagnosis Result</Typography>
-            <Typography variant="body1">{diagnosisResult}</Typography>
+        <animated.div style={springProps} className="result-container">
+          <div className="result-content">
+            <div className="diagnosis-card">
+              <Card>
+                <CardContent>
+                  <div className="diagnosis-result">
+                    <Typography variant="h6">Diagnosis Result</Typography>
+                    <Typography variant="body1">{diagnosisResult}</Typography>
+                  </div>
+                  <Link to={`/dashboard/orientationDetails/${diagnosisResult}`}>
+                    <Button variant="contained" className="details-button">
+                      View Details
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-          <Link to={`/dashboard/orientationDetails/${diagnosisResult}`}>
-            <Button variant="contained" className="details-button">
-              View Details
-            </Button>
-          </Link>
-        </div>
+        </animated.div>
       )}
     </div>
   );
 }
-
 // export default function PredictPage() {
 //   const [symptom1, setSymptom1] = useState("");
 //   const [symptom2, setSymptom2] = useState("");
